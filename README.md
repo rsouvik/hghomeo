@@ -17,3 +17,5 @@ https://github.com/angular-ui/ui-router
 
 #Setup project
 Point browser to http://localhost:3000 
+
+#Other stuff
