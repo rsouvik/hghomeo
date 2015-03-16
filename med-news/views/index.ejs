@@ -1,126 +1,130 @@
-<!doctype html>
 
-<html lang="en">
-<head>
-<title>HealthGini</title>
-  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <!doctype html>
+    <html  ng-app="hgApp" >
+    <head lang="en">
+    <title>HealthGini</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="/javascripts/components.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
 
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.js"></script>
-  <script src="/javascripts/angularApp.js"></script>
-  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+    <!--<link rel="stylesheet" href="bootstrap.css">-->
+    <style> .glyphicon-thumbs-up { cursor:pointer } </style>
   <style>
-  body {background-color:lightgrey}
-  h1   {color:blue}
-  p    {color:green}
-</style>
-</head>
-
- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+    body {background-color:#CEE3F6}
+    h1   {color:blue}
+    p    {color:green}
+    .well { background-color: #fff; }
+  </style>
+    </head>
+    
+     <nav class="navbar navbar-default">
+  <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">HG</a>
+      <a class="navbar-brand" href="#">HealthGini</a>
     </div>
     <div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
+      <!--<ul class="nav navbar-nav">-->
+      <!--  <li class="active"><a href="#">Home</a></li>-->
+      <!--  <li><a href="#">Page 1</a></li>-->
+      <!--  <li><a href="#">Page 2</a></li>-->
+      <!--  <li><a href="#">Page 3</a></li>-->
+      <!--</ul>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Doctor Login</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Patient Login</a></li>
       </ul>
     </div>
   </div>
-</nav>
- 
-<body ng-app="MedNews">
-  <div class="jumbotron">
-        <h1>Health Gini</h1>
-        <h2>Homeopathy on the Go!!</h2>
-        </div>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <ui-view></ui-view>
-        <!--<div ui-view></div>-->
-    </div>
-  </div>
-     
-    <script type="text/ng-template" id="/home.html">
-      <div class="page-header">
-        <!--<div class="jumbotron">-->
-        <h4>You last logged in </h4>
-        <!--</div>-->
+  </nav>
+      
+    <body ng-controller="mainController">
+      
+      <div class="container">
+      <div class="jumbotron">
+      <h1>Health Gini</h1>
+      <h2>Homeopathy on the Go!!</h2>
+      </div>
       </div>
       
+      
       <!--<div class="row">-->
-      <!--  <div class="col-md-2">-->
+      <!--  <div class="col-md-3">-->
       <!--  <h3></h3>-->
       <!--  </div>-->
-      <!--  <div class="col-md-2">-->
+      <!--  <div class="col-md-3">-->
       <!--  <h3></h3>-->
       <!--  </div>-->
-      <!--  <div class="col-md-2">-->
-      <!--  <h3></h3>-->
+      <!--  <div class="col-md-6">-->
+          <nav class="navbar navbar-default">
+          <div class="container">
+          <div class="navbar-header">
+          <a class="navbar-brand" href="/">HG</a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#medicines"><i class="fa fa-heartbeat"></i> My Medicines</a></li>
+            <li><a href="#question"><i class="fa fa-question-circle"></i> Questionnaire</a></li>
+            <li><a href="#"><i class="fa fa-reorder"></i> Order History</a></li>
+            <li><a href="#"><i class="fa fa-stethoscope"></i> Doctor Consultation</a></li>
+            
+            <!--<li><a href="#about"><i class="fa fa-shield"></i> About</a></li>-->
+            <!--<li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>-->
+          </ul>
+          </div>
+          </nav>
+          
+          <div id="main">
+  
+                <!-- angular templating -->
+		<!-- this is where content will be injected -->
+              <div ng-view></div>
+          </div>
       <!--  </div>-->
-      <!--  <div class="col-md-2">-->
-      <!--  <h3></h3>-->
+      <!--  -->
+      <!--</div>-->
+      <!--  <tabs>-->
+      <!--  <pane title="My Medicines">-->
+      <!--  <!--Date: {{ '2012-04-01' | date:'fullDate' }} <br>-->
+      <!--  <!--Currency: {{ 123456 | currency }} <br>-->
+      <!--  <!--Number: {{ 98765.4321 | number }} <br>-->
+      <!--  </pane>-->
+      <!--  <pane title="Questionnaire">-->
+      <!--  <!--<div ng-controller="BeerCounter">-->
+      <!--  <!--<div ng-repeat="beerCount in beers">-->
+      <!--  <!--<ng-pluralize count="beerCount" when="beerForms"></ng-pluralize>-->
+      <!--  <!--</div>-->
+      <!--  <!--</div>-->
+      <!--  </pane>-->
+      <!--  <pane title="Order History">-->
+      <!--  <!--Date: {{ '2012-04-01' | date:'fullDate' }} <br>-->
+      <!--  <!--Currency: {{ 123456 | currency }} <br>-->
+      <!--  <!--Number: {{ 98765.4321 | number }} <br>-->
+      <!--  </pane>-->
+      <!--  <pane title="Doctor Consultation">-->
+      <!--  <!--Date: {{ '2012-04-01' | date:'fullDate' }} <br>-->
+      <!--  <!--Currency: {{ 123456 | currency }} <br>-->
+      <!--  <!--Number: {{ 98765.4321 | number }} <br>-->
+      <!--  </pane>-->
+      <!--  </tabs>-->
       <!--  </div>-->
-      <!--  <div class="col-md-2">-->
-      <!--  <button class="btn btn-success pull-right" ng-click="editUser('new')">-->
-      <!--    <span class="glyphicon glyphicon-user"></span>  User Login-->
-      <!--  </button>-->
-      <!--  </div>-->
-      <!--  <div class="col-md-2">-->
-      <!--  <button class="btn btn-success pull-right" ng-click="editUser('new')">-->
-      <!--    <span class="glyphicon glyphicon-user"></span>  Doctor Login-->
-      <!--  </button>-->
+      <!--</div>-->
+      <!---->
+      <!--<div class="row tabbable">-->
+      <!--  <div class="span8 well">-->
+      <!--  <h3>                             </h3>-->
       <!--  </div>-->
       <!--</div>-->
       
-      <ul class="nav nav-pills">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">New order</a></li>
-    <li><a href="#">Purchase history</a></li>
-    <li><a href="#">Doctor Consultation</a></li>
-  </ul>
-
-      <!--<div ng-repeat="post in posts | orderBy:'-upvotes'">-->
-      <!--  <span class="glyphicon glyphicon-thumbs-up"-->
-      <!--    ng-click="incrementUpvotes(post)"></span>-->
-      <!--  {{post.upvotes}}-->
-      <!--  <span style="font-size:20px; margin-left:10px;">-->
-      <!--    <a ng-show="post.link" href="{{post.link}}">-->
-      <!--      {{post.title}}-->
-      <!--    </a>-->
-      <!--    <span ng-hide="post.link">-->
-      <!--      {{post.title}}-->
-      <!--    </span>-->
-      <!--    <span class="glyphicon glyphicon-envelope"-->
-      <!--    </span>-->
-      <!--  </span> -->
-      <!--</div>-->
-      <!---->
-      <!--<form ng-submit="addPost()"-->
-      <!--  style="margin-top:30px;">-->
-      <!--  <h3>Add a new post</h3>-->
-      <!---->
-      <!--  <div class="form-group">-->
-      <!--    <input type="text"-->
-      <!--      class="form-control"-->
-      <!--      placeholder="Title"-->
-      <!--      ng-model="title"></input>-->
-      <!--  </div>-->
-      <!--  <div class="form-group">-->
-      <!--    <input type="text"-->
-      <!--    class="form-control"-->
-      <!--    placeholder="Link"-->
-      <!--    ng-model="link"></input>-->
-      <!--  </div>-->
-      <!--  <button type="submit" class="btn btn-primary">Post</button>-->
-      <!--</form>-->
-    </script>
-</body>
-</html>
+      <footer class="text-center">
+        <span class="glyphicon glyphicon-copyright-mark"></span> HealthGini 2015
+      </footer>
+    
+    
+    
+    </body>
+    </html>

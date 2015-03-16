@@ -1,115 +1,80 @@
-var app = angular.module('MedNews', ['ui.router']);
 
-app.config([
-'$stateProvider',
-'$urlRouterProvider',
-function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
-    .state('home', {
-      url: '/home',
-      templateUrl: '/home.html',
-      controller: 'MainCtrl',
-      resolve: {
-	postPromise: ['posts', function(posts){
-	  return posts.getAll();
-	}]
-      }	
+    angular.module('app', ['components'])
+     
+    .controller('BeerCounter', function($scope, $locale) {
+    $scope.beers = [0, 1, 2, 3, 4, 5, 6];
+    if ($locale.id == 'en-us') {
+    $scope.beerForms = {
+    0: 'no beers',
+    one: '{} beer',
+    other: '{} beers'   
+    };
+    } else {
+    $scope.beerForms = {
+    0: 'hello1',
+    one: '{} hello2',
+    few: '{} hello3',
+    other: '{} hello4'
+    };
+    }
     });
 
-  $urlRouterProvider.otherwise('home');
-}]);
+// create the module and name it scotchApp
+	var hgApp = angular.module('hgApp', ['ngRoute']);
 
-app.factory('posts', ['$http', function($http){
-  var o = {
-    posts: []
-  };
-  o.create = function(post) {
-  return $http.post('/posts', post).success(function(data){
-    o.posts.push(data);	
-  });
-};
-o.upvote = function(post) {
-  return $http.put('/posts/' + post._id + '/upvote')
-    .success(function(data){
-      post.upvotes += 1;
-    });
-};
-  o.getAll = function() {
-	return $http.get('/posts').success(function(data){
-	angular.copy(data, o.posts);
+	// configure our routes
+	hgApp.config(function($routeProvider) {
+		$routeProvider
+
+			// route for the home page
+			.when('/', {
+				templateUrl : 'pages/home.html',
+				controller  : 'mainController'
+			})
+
+			// route for the about page
+			.when('/about', {
+				templateUrl : 'pages/about.html',
+				controller  : 'aboutController'
+			})
+
+			// route for the contact page
+			.when('/contact', {
+				templateUrl : 'pages/contact.html',
+				controller  : 'contactController'
+			})
+                        
+                        .when('/medicines', {
+				templateUrl : 'pages/medicines.html',
+				controller  : 'medController'
+			})
+                        
+                        .when('/question', {
+				templateUrl : 'pages/question.html',
+				controller  : 'quesController'
+			});
 	});
-  };
-  return o;
-}]);
 
-app.factory('userService', [function() {
-  var sdo = {
-    isLogged: false,
-    username: ''
-  };
-  return sdo;
-}]);
+	// create the controller and inject Angular's $scope
+	hgApp.controller('mainController', function($scope) {
+		// create a message to display in our view
+		$scope.message = 'Home!';
+	});
 
-app.controller('MainCtrl', [
-'$scope',
-'posts',
-function($scope, posts){
-  $scope.test = 'Hello world!';
-  $scope.posts = posts.posts;
-//  $scope.posts = [
-//  {title: 'post 1', upvotes: 5},
-//  {title: 'post 2', upvotes: 2},
-//  {title: 'post 3', upvotes: 15},
-//  {title: 'post 4', upvotes: 9},
-//  {title: 'post 5', upvotes: 4}
-//];
-  $scope.addPost = function(){
-   //$scope.posts = posts.posts;
-    if(!$scope.title || $scope.title === '') { return; }
-  //$scope.posts.push({
-  //  title: $scope.title,
-  //  link: $scope.link,
-  //  upvotes: 0
-  //});
-  posts.create({
-    title: $scope.title,
-    link: $scope.link,
-    upvotes: 0
-  });
-  $scope.title = '';
-  $scope.link = '';
-};
-$scope.incrementUpvotes = function(post) {
-  posts.upvote(post);
-};
-}]);
+	hgApp.controller('aboutController', function($scope) {
+		$scope.message = 'Look! I am an about page.';
+	});
 
-app.controller('LoginCtrl', [
-'$scope',
-'$http',
-'userService',
-function($scope, $http, User){
-  $scope.login = function() {
-  // configuration object
-  var config = { /* ... */ }
+	hgApp.controller('contactController', function($scope) {
+		$scope.message = 'Contact us! JK. This is just a demo.';
+	});
+        
+        hgApp.controller('quesController', function($scope) {
+		$scope.message = 'Questionnaire TBD.';
+	});
 
-  $http(config)
-  .success(function(data, status, headers, config) {
-    if (data.status) {
-      // succefull login
-      User.isLogged = true;
-      User.username = data.username;
-    }
-    else {
-      User.isLogged = false;
-      User.username = '';
-    }
-  })
-  .error(function(data, status, headers, config) {
-    User.isLogged = false;
-    User.username = '';
-  });
-}
-}]);
-
+	hgApp.controller('medController', function($scope) {
+		$scope.message = 'Medicines TBD.';
+	});
+        
